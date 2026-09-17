@@ -8,6 +8,8 @@
     This is a IntelliJ Theme based on nanotech/jellybeans.vim.
     ]]></description>
 
+    <idea-version since-build="233"/>
+
     <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>

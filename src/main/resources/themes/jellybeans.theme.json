@@ -5,7 +5,7 @@
   "editorScheme": "/themes/jellybeans.xml",
   "colors": {
     "accentColor": "#8197bf",
-    "secondaryAccentColor": "fabb6e",
+    "secondaryAccentColor": "#fabb6e",
     "primaryForeground": "#e8e8d3",
     "primaryBackground": "#202020",
     "secondaryBackground": "#222222",
@@ -304,7 +304,7 @@
       "Actions.Grey": "#858994",
       "Actions.GreyInline.Dark": "#777777",
       "Actions.GreyInline": "#999999",
-      "Actions.Red": "cf6a4c",
+      "Actions.Red": "#cf6a4c",
       "Actions.Yellow": "#ffe2a9",
       "Objects.Blue": "#8197bf",
       "Objects.Green": "#99ad6a",

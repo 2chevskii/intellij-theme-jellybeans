@@ -1,36 +1,50 @@
-import org.jetbrains.intellij.tasks.RunPluginVerifierTask
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 plugins {
-    id 'org.jetbrains.intellij' version '1.0'
-    id 'org.jetbrains.kotlin.jvm' version '1.5.10'
+    id 'org.jetbrains.intellij.platform' version '2.18.1'
 }
 
-group 'com.boppy'
-version '1.0-SNAPSHOT'
+group = 'com.boppy'
+version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    intellijPlatform {
+        intellijIdea '2023.3'
+        pluginVerifier()
+    }
 }
 
-// See https://github.com/JetBrains/gradle-intellij-plugin/
-intellij {
-    version '2021.1.2'
-}
-/*
-patchPluginXml {
-    changeNotes """
-      V1 Unstable"""
-}*/
+intellijPlatform {
+    buildSearchableOptions = false
 
-runPluginVerifier {
-    ideVersions = ["201.8743.12", "202.8194.7", "203.7148.57", "211.6693.111"]
-    failureLevel = EnumSet.of(RunPluginVerifierTask.FailureLevel.COMPATIBILITY_PROBLEMS, RunPluginVerifierTask.FailureLevel.INVALID_PLUGIN)
+    pluginConfiguration {
+        ideaVersion {
+            sinceBuild = '233'
+            untilBuild = provider { null }
+        }
+    }
+
+    pluginVerification {
+        ides {
+            latest {
+                it.types = [IntelliJPlatformType.IntellijIdea]
+            }
+        }
+    }
+
+    publishing {
+        token = providers.systemProperty('jetbrains.token')
+    }
 }
 
-publishPlugin {
-    token System.getProperty("jetbrains.token")
+tasks.wrapper {
+    gradleVersion = '9.5.1'
+    distributionType = Wrapper.DistributionType.BIN
 }
