@@ -1,11 +1,13 @@
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+import org.jetbrains.intellij.platform.gradle.models.ProductRelease
+import org.jetbrains.intellij.platform.gradle.tasks.VerifyPluginTask
 
 plugins {
-    id 'org.jetbrains.intellij.platform' version '2.18.1'
+    id 'org.jetbrains.intellij.platform' version '2.20.0'
 }
 
-group = 'com.boppy'
-version = '1.0-SNAPSHOT'
+group = 'io.github.2chevskii'
+version = providers.gradleProperty('pluginVersion').get()
 
 repositories {
     mavenCentral()
@@ -16,13 +18,14 @@ repositories {
 
 dependencies {
     intellijPlatform {
-        intellijIdea '2023.3'
+        intellijIdea '2023.3.8'
         pluginVerifier()
     }
 }
 
 intellijPlatform {
     buildSearchableOptions = false
+    instrumentCode = false
 
     pluginConfiguration {
         ideaVersion {
@@ -32,19 +35,41 @@ intellijPlatform {
     }
 
     pluginVerification {
+        failureLevel = VerifyPluginTask.FailureLevel.ALL
         ides {
+            create(IntelliJPlatformType.IntellijIdea, '2023.3.8')
             latest {
                 it.types = [IntelliJPlatformType.IntellijIdea]
+                it.channels = [ProductRelease.Channel.RELEASE]
             }
         }
     }
 
     publishing {
-        token = providers.systemProperty('jetbrains.token')
+        token = providers.environmentVariable('JETBRAINS_MARKETPLACE_TOKEN')
+            .orElse(providers.systemProperty('jetbrains.token'))
+    }
+
+    signing {
+        certificateChain = providers.environmentVariable('CERTIFICATE_CHAIN')
+        privateKey = providers.environmentVariable('PRIVATE_KEY')
+        password = providers.environmentVariable('PRIVATE_KEY_PASSWORD')
     }
 }
 
 tasks.wrapper {
-    gradleVersion = '9.5.1'
+    gradleVersion = '9.8.2'
     distributionType = Wrapper.DistributionType.BIN
+    distributionSha256Sum = '21bd5da2de49b642904077f38c0efdc7778e92b3ed0889392dca61b97e389607'
+    networkTimeout = 60000
+    retries = 3
+}
+
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+tasks.named('jar') {
+    from('LICENSE') { into 'META-INF' }
 }

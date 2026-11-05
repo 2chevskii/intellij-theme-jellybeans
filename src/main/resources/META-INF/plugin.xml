@@ -1,25 +1,28 @@
-<idea-plugin>
-    <id>com.boppy.jellybeans</id>
-    <name>Jellybeans Theme</name>
-    <vendor email="zack-nx@protonmail.ch" url="https://github.com/aurdevv/jellybeans-intellij">boppy</vendor>
+<idea-plugin url="https://github.com/2chevskii/intellij-theme-jellybeans">
+    <id>io.github.2chevskii.jellybeans</id>
+    <name>Jellybeans Theme Continued</name>
+    <vendor url="https://github.com/2chevskii">2chevskii</vendor>
 
     <description><![CDATA[
-    Any color corrections are welcomed! check out the repository: github.com/aurdevv/jellybeans-intellij.<br>
-    This is a IntelliJ Theme based on nanotech/jellybeans.vim.
+    <p>A dark theme with warm, muted syntax colors inspired by
+    <a href="https://github.com/nanotech/jellybeans.vim">Jellybeans for Vim</a>.</p>
+    <p>Includes a matching editor color scheme and colors for IDE controls, tool windows,
+    version control, and syntax highlighting. Select <b>Jellybeans</b> in
+    Settings | Appearance &amp; Behavior | Appearance | Theme.</p>
+    <p>Maintained continuation of the original Jellybeans IntelliJ theme by Zack A. (aurdevv),
+    via sefidel/jellybeans-intellij. Source code and issue reports:
+    <a href="https://github.com/2chevskii/intellij-theme-jellybeans">GitHub</a>.</p>
     ]]></description>
 
-    <idea-version since-build="233"/>
+    <change-notes><![CDATA[
+    <p>1.0.0: First release of the maintained continuation. Preserves the Jellybeans palette,
+    updates plugin metadata and build tooling, and adds automated resource and compatibility checks.</p>
+    ]]></change-notes>
 
-    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
-         on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
-        <themeProvider id="07e467d8-25ce-4318-ade2-586bd266d1d6" path="/themes/jellybeans.theme.json"/>
+        <themeProvider id="io.github.2chevskii.jellybeans" path="/themes/jellybeans.theme.json"/>
     </extensions>
 
-    <actions>
-        <!-- Add your actions here -->
-    </actions>
 </idea-plugin>

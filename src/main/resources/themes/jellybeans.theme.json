@@ -1,7 +1,7 @@
 {
   "name": "Jellybeans",
   "dark": true,
-  "author": "Zack A.",
+  "author": "Zack A.; maintained by 2chevskii",
   "editorScheme": "/themes/jellybeans.xml",
   "colors": {
     "accentColor": "#8197bf",
@@ -17,7 +17,7 @@
   },
   "ui": {
     "*": {
-      "arc": "7",
+      "arc": 7,
       "background": "primaryBackground",
       "selectionForeground": "primaryForeground",
       "selectionInactiveForeground": "primaryForeground",
